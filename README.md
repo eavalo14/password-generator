@@ -11,7 +11,7 @@ When building this application, the biggest challenge was building the password 
 
 ## Installation
 
- * To deploy application, go to [My Github Project](https://erickjavalos.github.io/password-generator/)
+ * To deploy application, go to [password-generator](https://erickjavalos.github.io/password-generator/)
 
 ## Usage
 
@@ -20,4 +20,4 @@ When building this application, the biggest challenge was building the password 
  * Click "OK" for character types you would like to include. Click "cancel" for the ones you do NOT want to include.
  * Complete all prompts
 
-![Screenshot](assets/password-generator.png)
+![Screenshot](assets/images/password-generator.png)
