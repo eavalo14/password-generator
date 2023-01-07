@@ -53,9 +53,46 @@ generatePassword = () =>
 
 buildPassword = (inputs) => 
 {
-  console.log(inputs)
-
+  let password = []
+  // dictionary mapping the input values to global variables
+  let characterType2Var = {'lowerCase':'lowerLetters', 'upperCase':'upperLetters', 'numeric':'numbers', 'specialChar':'specialChar'}
+  // get keys from dictionary defined
+  let keys = Object.keys(characterType2Var)
+  // define loop for keys
+  keys.forEach((key) =>
+  {
+    // check if the keys are true or false    
+    if(inputs[key])
+    {
+      // indexes into appropriate global variable
+      let randChar = window[characterType2Var[key]][Math.floor(Math.random()*window[characterType2Var[key]].length)]
+      
+      // appends the random char to the password array
+      password.push(randChar)
+    }
+  })
+  // append random chars until length has been reached
+  while (password.length < inputs.length)
+  {
+    password.push(lowerLetters[Math.floor(Math.random()*lowerLetters.length)])
+  }
+  // reshuffle the password to make it more randomized
+  shuffleArray(password)
+  // return the shuffled password
+  return password.join("")
 }
+
+// retrieved from stack overflow link: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+}
+
+
 // ********************************************************
 // GETTER FUNCTIONS
 // ********************************************************
@@ -105,7 +142,6 @@ function writePassword() {
   // grab inputs
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  console.log(password)
   if (password !== -1 )
   {
     passwordText.value = password;
