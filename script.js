@@ -17,6 +17,20 @@ getInputs = () =>
   let inputs = {};
   // prompt for password length
   let passLen = getPasswordLen()
+  // return an error dictionary if canceled operation
+  if (passLen === 0)
+  {
+    // inject error status code -1
+    inputs['error'] = -1
+    return inputs
+  }
+
+  inputs['length'] = passLen
+  // prompt for character types (lowercase, uppercase, numeric, and/or special characters)
+  inputs = (getCharTypes(inputs))
+
+  // return the inputs
+  return inputs;
 
 }
 
@@ -25,6 +39,12 @@ generatePassword = () =>
 {
   // prompt user for inputs
   let inputs = getInputs()
+  // failed to compile the inputs
+  if (inputs['error'] === -1)
+  {
+    return -1;
+  }
+
   // build password
   return buildPassword(inputs)
   
@@ -33,7 +53,7 @@ generatePassword = () =>
 
 buildPassword = (inputs) => 
 {
-
+  console.log(inputs)
 
 }
 // ********************************************************
@@ -60,6 +80,25 @@ getPasswordLen = () =>
   return passwordLen;
 }
 
+// gets char types 
+getCharTypes = (inputs) =>
+{
+  // promput userss
+  const addLowerCase    = confirm("Do you want lower case characters?");
+  const addUpperCase    = confirm("Do you want upper case characters?");
+  const addNumeric      = confirm("Do you want to add numeric chars?");
+  const addSpecialChar  = confirm("Do you want to add special characters?")
+
+  // save into dictionary
+  inputs["lowerCase"]   = addLowerCase
+  inputs["upperCase"]   = addUpperCase
+  inputs["numeric"]     = addNumeric
+  inputs["specialChar"] = addSpecialChar
+
+  // return dictionary
+  return inputs
+}
+
 
 // Write password to the #password input
 function writePassword() {
@@ -67,6 +106,10 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   console.log(password)
+  if (password !== -1 )
+  {
+    passwordText.value = password;
+  }
 
 }
 
