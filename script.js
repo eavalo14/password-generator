@@ -13,6 +13,11 @@ var generateBtn = document.querySelector("#generate");
 
 getInputs = () =>
 {
+  // dictionary for prompts
+  let inputs = {};
+  // prompt for password length
+  let passLen = getPasswordLen()
+
 }
 
 // generate password with inputs
@@ -20,7 +25,7 @@ generatePassword = () =>
 {
   // prompt user for inputs
   let inputs = getInputs()
-  // failed to compile the inputs
+  // build password
   return buildPassword(inputs)
   
 
@@ -29,8 +34,31 @@ generatePassword = () =>
 buildPassword = (inputs) => 
 {
 
-}
 
+}
+// ********************************************************
+// GETTER FUNCTIONS
+// ********************************************************
+
+// password length getter function
+getPasswordLen = () =>
+{
+  var passwordLen = 0
+  while (!((passwordLen >= 8 && passwordLen <= 128)))
+  {
+    // prompt password length
+    passwordLen = prompt("Enter length of desired password from 8 to 128:");
+    // check if cancel was hit
+    if (passwordLen === null)
+    {
+      // exit from while loop and return 0
+      passwordLen = 0
+      break
+    }
+  }
+  // check for validity of value 
+  return passwordLen;
+}
 
 
 // Write password to the #password input
